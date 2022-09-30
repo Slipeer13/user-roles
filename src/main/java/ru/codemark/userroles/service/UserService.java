@@ -3,10 +3,12 @@ package ru.codemark.userroles.service;
 import ru.codemark.userroles.entity.User;
 import ru.codemark.userroles.mapper.UserDTO;
 
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.ws.ResponseWrapper;
 import java.util.List;
+
 
 @WebService(targetNamespace = "http://codemark.ru.userroles/", name = "UserService")
 public interface UserService {
@@ -23,28 +25,28 @@ public interface UserService {
 			localName = "findUserResponse",
 			targetNamespace = "http://codemark.ru.userroles/",
 			className = "ru.codemark.userroles.service.UserService.findUserResponse")
-	UserDTO findUserByLogin(String login);
+	UserDTO findUserByLogin(@WebParam(name = "login") String login);
 
-	@WebResult(name = "delete_user", targetNamespace = "")
+	@WebResult(name = "delete_user")
 	@ResponseWrapper(
 			localName = "deleteUserResponse",
 			targetNamespace = "http://codemark.ru.userroles/",
 			className = "ru.codemark.userroles.service.UserService.deleteUserResponse")
-	User deleteUserByLogin(String login);
+	User deleteUserByLogin(@WebParam(name = "login") String login);
 
-	@WebResult(name = "save_user", targetNamespace = "")
+	@WebResult(name = "save_user")
 	@ResponseWrapper(
 			localName = "saveUserResponse",
 			targetNamespace = "http://codemark.ru.userroles/",
 			className = "ru.codemark.userroles.service.UserService.saveUserResponse")
-	Response saveUser(User user);
+	Response saveUser(@WebParam(name = "user") User user);
 
-	@WebResult(name = "update_user", targetNamespace = "")
+	@WebResult(name = "update_user")
 	@ResponseWrapper(
 			localName = "updateUserResponse",
 			targetNamespace = "http://codemark.ru.userroles/",
 			className = "ru.codemark.userroles.service.UserService.updateUserResponse")
-	Response updateUser(String login, User user);
+	Response updateUser(@WebParam(name = "oldLogin") String login, @WebParam(name = "newDataUser") User user);
 
 
 }

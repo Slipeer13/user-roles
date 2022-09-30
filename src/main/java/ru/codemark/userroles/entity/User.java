@@ -18,6 +18,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+
 public class User {
 
     @Size(min = 2, message = "имя должно быть длиннее 1 символа")

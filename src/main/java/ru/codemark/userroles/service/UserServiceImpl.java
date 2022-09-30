@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @WebService(
 		serviceName = "UserService",
 		portName = "UserPort",
@@ -72,9 +73,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Response updateUser(String oldLogin, User newUser) {
+	public Response updateUser(String oldLogin, User userNewData) {
 		User user = deleteUserByLogin(oldLogin);
-		Response response = saveUser(newUser);
+		Response response = saveUser(userNewData);
 		if(!response.getSuccess()) {
 			saveUser(user);
 		}
