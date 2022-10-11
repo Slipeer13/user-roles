@@ -1,8 +1,10 @@
 package ru.codemark.userroles.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.codemark.userroles.entity.User;
 import ru.codemark.userroles.mapper.Mapper;
 import ru.codemark.userroles.mapper.UserDTO;
@@ -32,10 +34,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public UserDTO findUserByLogin(String login) {
 		 User user = userRepository.findById(login)
 				.orElseThrow(()-> new EntityNotFoundException(String.format("Нет пользователя с логином %s", login)));
 		 UserDTO userDTO = mapper.getUserDTOFromUser(user);
+		 Hibernate.initialize(user.getRoles());
 		 userDTO.setRoles(user.getRoles());
 		 return userDTO;
 	}
