@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public UserDTO findUserByLogin(String login) {
 		 User user = userRepository.findById(login)
 				.orElseThrow(()-> new EntityNotFoundException(String.format("Нет пользователя с логином %s", login)));
