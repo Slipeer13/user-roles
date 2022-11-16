@@ -21,7 +21,7 @@ public class UserRolesAppConfig {
 	UserService userService;
 	
 	@Bean
-	public Endpoint helloEndpoint() {
+	public Endpoint userServiceEndpoint() {
 		EndpointImpl endpoint = new EndpointImpl(bus, userService);
 		endpoint.publish("/UserService");
 		return endpoint;
